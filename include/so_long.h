@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/04 15:51:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/05 17:12:43 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_locate
 	size_t	y;
 }	t_locate;
 
+void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab);
 void	bfs_path(size_t **pathtab,
 			t_param *checker, t_checkpoint *checkpoint);
 size_t	version_check(char *arg);

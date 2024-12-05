@@ -6,33 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 02:39:10 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/05 01:29:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/05 17:17:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab)
-{
-	size_t			i;
-	size_t			j;
-
-	i = 0;
-	while (pathtab[i])
-	{
-		j = 0;
-		while (pathtab[i][j])
-		{
-			if (actualpos == pathtab[i][j])
-			{
-				locate->x = j;
-				locate->y = i;
-			}
-			j++;
-		}
-	i++;
-	}
-}
 
 size_t	visit(size_t pathtab, size_t *visited)
 {
@@ -49,47 +27,48 @@ size_t	visit(size_t pathtab, size_t *visited)
 	}
 	return (bol);
 }
-
-void	process_queue(size_t **q, size_t **p, t_locate *l, size_t **v)
-{
+typedef struct s_neighbor {
+	size_t	**queue;
+	size_t	**visited;
 	size_t	i;
+	size_t	j;
+}	t_neighbor;
 
-	i = 0;
-	while ((*q)[i] != 0)
+void	valid_neigh(size_t valid_neighbor, t_neighbor *neighbor)
+{
+	if (valid_neighbor != 9999
+		&& visit(valid_neighbor, *(neighbor->visited)) == 0)
 	{
-		(*q)[i] = (*q)[i + 1];
-		i++;
+		(*(neighbor->queue))[neighbor->i] = valid_neighbor;
+		(*(neighbor->visited))[neighbor->j] = valid_neighbor;
+		neighbor->i++;
+		neighbor->j++;
 	}
-	if (p[l->y - 1][l->x] != 9999 && visit(p[l->y - 1][l->x], *v) == 0)
+}
+
+void	process_queue(size_t **queue, size_t **pathtab, t_locate *locate,
+		size_t **visited)
+{
+	t_neighbor	neighbor;
+
+	neighbor.queue = queue;
+	neighbor.visited = visited;
+	neighbor.i = 0;
+	neighbor.j = 0;
+	while ((*queue)[neighbor.i] != 0)
+		neighbor.i++;
+	while ((*visited)[neighbor.j] != 0)
+		neighbor.j++;
+	valid_neigh(pathtab[locate->y - 1][locate->x], &neighbor);
+	valid_neigh(pathtab[locate->y + 1][locate->x], &neighbor);
+	valid_neigh(pathtab[locate->y][locate->x - 1], &neighbor);
+	valid_neigh(pathtab[locate->y][locate->x + 1], &neighbor);
+	neighbor.i = 0;
+	while ((*queue)[neighbor.i] != 0)
 	{
-		(*q)[i++] = p[l->y - 1][l->x];
-		printf("%zu\n", p[l->y - 1][l->x]);
+		(*queue)[neighbor.i] = (*queue)[neighbor.i + 1];
+		neighbor.i++;
 	}
-	if (p[l->y + 1][l->x] != 9999 && visit(p[l->y + 1][l->x], *v) == 0)
-	{
-		(*q)[i++] = p[l->y + 1][l->x];
-		printf("%zu\n", p[l->y - 1][l->x]);
-	}
-	if (p[l->y][l->x - 1] != 9999 && visit(p[l->y][l->x - 1], *v) == 0)
-	{
-		(*q)[i++] = p[l->y][l->x - 1];
-		printf("%zu\n", p[l->y][l->x - 1]);
-	}
-	if (p[l->y][l->x + 1] != 9999 && visit(p[l->y][l->x + 1], *v) == 0)
-	{
-		(*q)[i++] = p[l->y][l->x + 1];
-		printf("%zu\n", p[l->y][l->x + 1]);
-	}
-	i = 0;
-	while ((*q)[i] != 0)
-	{
-		printf("CA MARCHE%zu", (*q)[i]);
-		i++;
-	}
-	i = 0;
-	while ((*v)[i] != 0)
-	i++;
-	(*v)[i] = p[l->y][l->x];
 }
 
 size_t	pathfinder(size_t **pathtab, t_param *checker,
@@ -101,9 +80,9 @@ size_t	pathfinder(size_t **pathtab, t_param *checker,
 	size_t		searched;
 	t_locate	*locate;
 
-	queue = calloc(sizeof(size_t), 250);
+	queue = ft_calloc(sizeof(size_t), 250);
 	locate = malloc(sizeof(*locate));
-	visited = calloc(sizeof(size_t), 250);
+	visited = ft_calloc(sizeof(size_t), 250);
 	actualpos = pathtab[checker->spawny][checker->spawnx];
 	searched = pathtab[checkpoint->y][checkpoint->x];
 	queue[0] = actualpos;
@@ -113,10 +92,15 @@ size_t	pathfinder(size_t **pathtab, t_param *checker,
 		process_queue(&queue, pathtab, locate, &visited);
 		actualpos = queue[0];
 	}
+	int i = 0;
+	while (visited[i])
+	{
+		printf("%zu\n", visited[i]);
+		i++;
+	}
 	free(locate);
 	free(queue); //free in isreachable
 	free(visited);
-
 	return (0/*isreachable(visited, searched)*/);
 }
 
@@ -126,13 +110,9 @@ void	bfs_path(size_t **pathtab, t_param *checker,
 	size_t	bol;
 
 	bol = 0;
-	while (checkpoint)
-	{
-		//printf("\nx:%zu\n", checkpoint->x);
-		//printf("y:%zu\n", checkpoint->y);
-		bol = pathfinder(pathtab, checker, checkpoint);
-		if (bol == 1)
-			write(1, "error", 5);
-		checkpoint = checkpoint->next;
-	}
+	//printf("\nx:%zu\n", checkpoint->x);
+	//printf("y:%zu\n", checkpoint->y);
+	bol = pathfinder(pathtab, checker, checkpoint);
+	if (bol == 1)
+		write(1, "error", 5);
 }
