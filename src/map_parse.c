@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 13:29:37 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/03 00:43:01 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:00:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ void	rectangle_check(char **gameboard, t_param *checker)
 		}
 		i++;
 	}
-	if (j == i)
-		checker->rectangle = 2;
-	checker->lenght = j;
+	checker->lenght = j - 1;
 }
 
 void	wall_check(char **gameboard, t_param *checker)
@@ -80,13 +78,11 @@ void	wall_check(char **gameboard, t_param *checker)
 		{
 			if (gameboard[i][j] != '\n')
 			{
-				if ((gameboard[0][j] != '1' && gameboard[0][j] != 'E') ||
-					(gameboard[checker->width - 1][j] != '1' &&
-					gameboard[checker->width - 1][j] != 'E'))
+				if (gameboard[0][j] != '1' ||
+				gameboard[checker->width - 1][j] != '1')
 					checker->wall = 1;
-				if ((gameboard[i][0] != '1' && gameboard[i][0] != 'E') ||
-					(gameboard[i][checker->lenght - 1] != '1' &&
-					gameboard[i][checker->lenght - 1] != 'E'))
+				if (gameboard[i][0] != '1' ||
+				gameboard[i][checker->lenght] != '1')
 					checker->wall = 1;
 			}
 			j++;
@@ -99,20 +95,25 @@ size_t	map_check(char **gameboard, t_param *checker)
 {
 	rectangle_check(gameboard, checker);
 	if (checker->rectangle != 0)
-		write(2, "error", 5);
+		return (write(2, "Error\n wrong map size", 22));
 	setupcollector(gameboard, checker);
+	if (checker->exit > 1)
+		return (write(2, "Error \nToo many exits", 22));
+	if (checker->exit < 1)
+		return (write(2, "Error \n No exit, dude i need to get out", 40));
+	if (checker->invalidchar == 1)
+		return (write(2, "Error \ninvalid char\n", 21));
+	if (checker->spawn > 1)
+		return (write(2, "Error \nToo many spawns", 23));
+	if (checker->spawn < 1)
+		return (write(2, "Error \nNo spawn", 16));
+	if (checker->collect < 1)
+		return (write(2, "Error \n At least one item please", 33));
 	wall_check(gameboard, checker);
-	if (checker->exit != 1 || checker->invalidchar == 1
-		|| checker->spawn != 1 || checker->collect < 1)
-		write(2, "invalid map\n", 11);
-	printf("\nlen: %zu\n", checker->lenght);
-	printf("\nwidth: %zu\n", checker->width);
-	printf("\ninvalidchar%zu\n", checker->invalidchar);
-	printf("collect%zu\n", checker->collect);
-	printf("exit%zu\n", checker->exit);
-	printf("spawn%zu\n", checker->spawn);
-	printf("rectangle%zu\n", checker->rectangle);
-	printf("wall%zu\n", checker->wall);
+	if (checker->wall == 1)
+		return (write(2, "Error \n Map should be surrounded by walls", 42));
 	pathfinding(gameboard, checker);
-	return (0);
+	if (checker->path == 1)
+		return (write(2, "Error \n No pathing possible. BFS aproved", 41));
+	return (1);
 }

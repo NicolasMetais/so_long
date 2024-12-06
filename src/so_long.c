@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/03 14:36:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:03:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(void)
 	char	**gameboard;
 	t_param	checker;
 	char	*file;
+	size_t	error;
 
 	file = "test.ber";
 	init(&checker);
@@ -54,10 +55,10 @@ int	main(void)
 		if (version_check(file) == 1)
 			return (write(2, "error", 6));
 		gameboard = table_construct(gameboard, file, &checker);
-		if (map_check(gameboard, &checker) == 1)
-			return (write(2, "wrong map", 9));
-		else
-			printf("GO\n");
+		error = map_check(gameboard, &checker);
+		if (error != 1)
+			return (1);
+		//LANCER LE JEU MTN
 		free (gameboard);
 	//}
 }

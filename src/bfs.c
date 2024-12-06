@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 02:39:10 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/05 17:17:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:06:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	process_queue(size_t **queue, size_t **pathtab, t_locate *locate,
 	valid_neigh(pathtab[locate->y][locate->x - 1], &neighbor);
 	valid_neigh(pathtab[locate->y][locate->x + 1], &neighbor);
 	neighbor.i = 0;
+
 	while ((*queue)[neighbor.i] != 0)
 	{
 		(*queue)[neighbor.i] = (*queue)[neighbor.i + 1];
@@ -71,20 +72,18 @@ void	process_queue(size_t **queue, size_t **pathtab, t_locate *locate,
 	}
 }
 
-size_t	pathfinder(size_t **pathtab, t_param *checker,
+void	pathfinder(size_t **pathtab, t_param *checker,
 		t_checkpoint *checkpoint)
 {
 	size_t		*queue;
 	size_t		*visited;
 	size_t		actualpos;
-	size_t		searched;
 	t_locate	*locate;
 
 	queue = ft_calloc(sizeof(size_t), 250);
 	locate = malloc(sizeof(*locate));
 	visited = ft_calloc(sizeof(size_t), 250);
 	actualpos = pathtab[checker->spawny][checker->spawnx];
-	searched = pathtab[checkpoint->y][checkpoint->x];
 	queue[0] = actualpos;
 	while (queue[0] != 0)
 	{
@@ -92,27 +91,8 @@ size_t	pathfinder(size_t **pathtab, t_param *checker,
 		process_queue(&queue, pathtab, locate, &visited);
 		actualpos = queue[0];
 	}
-	int i = 0;
-	while (visited[i])
-	{
-		printf("%zu\n", visited[i]);
-		i++;
-	}
 	free(locate);
-	free(queue); //free in isreachable
-	free(visited);
-	return (0/*isreachable(visited, searched)*/);
-}
-
-void	bfs_path(size_t **pathtab, t_param *checker,
-		t_checkpoint *checkpoint)
-{
-	size_t	bol;
-
-	bol = 0;
-	//printf("\nx:%zu\n", checkpoint->x);
-	//printf("y:%zu\n", checkpoint->y);
-	bol = pathfinder(pathtab, checker, checkpoint);
-	if (bol == 1)
-		write(1, "error", 5);
+	free(queue);
+	checkpoint = NULL;
+	isreachable(checkpoint, visited, pathtab, checker);
 }

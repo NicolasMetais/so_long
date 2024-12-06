@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 00:18:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/11/25 14:02:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/05 17:57:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int	ft_printf(const char *format, ...)
 #include <stdio.h>
 int main(void)
 { 
-	//char u[] = "test";
+	char u[] = "test";
 	int test;
 	int test1;
 
-	test = ft_printf(" %x ", -100);
-	test1 = printf(" %x ", -100);
+	test = ft_printf(" %p ", u);
+	test1 = printf(" %p ", u);
 	printf("\nft_printf:%d\n printf: %d", test, test1);
 }*/
