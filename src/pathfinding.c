@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:01:40 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/06 18:19:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/06 18:30:14 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,14 @@ void	spawnpos(char **gameboard, t_param *checker)
 	}
 }
 
-void	checkpoint_extend(t_checkpoint *new, size_t c, t_param *checker,
-	t_checkpoint *checkpoint)
+void	checkpoint_extend(t_checkpoint *new, size_t c, t_param *checker
+	, t_checkpoint *checkpoint)
 {
-	printf("%zu\n" ,checker->collect);
-	printf("%zu\n", c);
 	if (c < checker->collect)
 	{
-		printf("TEST\n");
+		new = malloc(sizeof(*new));
 		checkpoint->next = new;
 		checkpoint = new;
-		checkpoint->next = NULL;
 	}
 	else
 		checkpoint->next = NULL;
@@ -55,8 +52,8 @@ void	getcheckpoints(char **gameboard, t_checkpoint *checkpoint,
 {
 	size_t			i;
 	size_t			j;
+	t_checkpoint	*new = NULL;
 	size_t			c;
-	t_checkpoint	*new;
 
 	i = 0;
 	c = 0;
@@ -69,9 +66,17 @@ void	getcheckpoints(char **gameboard, t_checkpoint *checkpoint,
 			{
 				checkpoint->x = j;
 				checkpoint->y = i;
-				new = malloc(sizeof(*new));
-				printf("Y%zu\nX%zu\n", checkpoint->y,checkpoint->x);
-				checkpoint_extend(new ,c, checker, checkpoint);
+				checkpoint_extend(new, c, checker, checkpoint);
+				/*if (c < checker->collect)
+				{
+					new = malloc(sizeof(*new));
+					if (!new)
+						return ;
+					checkpoint->next = new;
+					checkpoint = new;
+				}
+				else
+					checkpoint->next = NULL;*/
 				c++;
 			}
 			j++;
