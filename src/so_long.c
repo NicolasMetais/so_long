@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/06 15:03:50 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/09 04:16:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,27 @@
 #include <stdio.h> // A DELETE
 #include <fcntl.h>
 
-void	freeme(char **table)
+void	freechar(char **table)
 {
 	size_t	i;
 
 	i = 0;
-	while (table)
+	if (!table)
+		return ;
+	while (table[i])
+	{
+		free(table[i]);
+		i++;
+	}
+	free(table);
+}
+
+void	freesizet(size_t **table, size_t checker)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < checker)
 	{
 		free(table[i]);
 		i++;
@@ -53,12 +68,14 @@ int	main(void)
 	/*if (ac == 2)
 	{*/
 		if (version_check(file) == 1)
-			return (write(2, "error", 6));
+			return (write(2, "Error \n Bad file extension", 27));
 		gameboard = table_construct(gameboard, file, &checker);
 		error = map_check(gameboard, &checker);
 		if (error != 1)
-			return (1);
-		//LANCER LE JEU MTN
-		free (gameboard);
+			return (freechar(gameboard), 1);
+		run_game(gameboard, checker);
+		freechar(gameboard);
+		
+
 	//}
 }

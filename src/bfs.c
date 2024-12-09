@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 02:39:10 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/06 15:06:24 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/08 21:37:25 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	process_queue(size_t **queue, size_t **pathtab, t_locate *locate,
 	}
 }
 
-void	pathfinder(size_t **pathtab, t_param *checker,
+void	bfs(size_t **pathtab, t_param *checker,
 		t_checkpoint *checkpoint)
 {
 	size_t		*queue;
@@ -80,19 +80,24 @@ void	pathfinder(size_t **pathtab, t_param *checker,
 	size_t		actualpos;
 	t_locate	*locate;
 
-	queue = ft_calloc(sizeof(size_t), 250);
+	queue = ft_calloc(sizeof(size_t), checker->walkable);
+	if (!queue)
+		return ;
 	locate = malloc(sizeof(*locate));
-	visited = ft_calloc(sizeof(size_t), 250);
+	if (!locate)
+		return ;
+	visited = ft_calloc(sizeof(size_t), checker->walkable);
+	if (!visited)
+		return ;
 	actualpos = pathtab[checker->spawny][checker->spawnx];
 	queue[0] = actualpos;
 	while (queue[0] != 0)
 	{
-		locatepos(locate, actualpos, pathtab);
+		locatepos(locate, actualpos, pathtab, checker);
 		process_queue(&queue, pathtab, locate, &visited);
 		actualpos = queue[0];
 	}
 	free(locate);
 	free(queue);
-	checkpoint = NULL;
 	isreachable(checkpoint, visited, pathtab, checker);
 }

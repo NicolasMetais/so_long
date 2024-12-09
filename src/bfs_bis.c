@@ -6,19 +6,32 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:07:13 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/06 16:40:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/08 18:55:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab)
+void	freecheckpoint(t_checkpoint *checkpoint)
+{
+	t_checkpoint	*new;
+
+	while (checkpoint)
+	{
+		new = checkpoint->next;
+		free (checkpoint);
+		checkpoint = new;
+	}
+}
+
+void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab,
+	t_param *checker)
 {
 	size_t			i;
 	size_t			j;
 
 	i = 0;
-	while (pathtab[i])
+	while (i < checker->width)
 	{
 		j = 0;
 		while (pathtab[i][j])
@@ -45,7 +58,6 @@ void	isreachable(t_checkpoint *checkpoint, size_t *visited, size_t **pathtab,
 	i = 0;
 	while (checkpoint)
 	{
-		printf("\ny pos :%zu\n x pos :%zu\n", checkpoint->y, checkpoint->x);
 		reach = pathtab[checkpoint->y][checkpoint->x];
 		i = 0;
 		while (visited[i])

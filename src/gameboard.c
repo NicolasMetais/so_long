@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:42:31 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/02 16:15:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/08 21:03:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,26 @@ size_t	gettablesize(char *arg)
 char	**table_construct(char **gameboard, char *arg, t_param *checker)
 {
 	int		fd;
-	char	*line;
 	size_t	i;
 
 	i = 0;
 	checker->width = gettablesize(arg);
-	gameboard = malloc(checker->width * sizeof(char *) + 1);
-	if (!gameboard)
-		return (NULL);
+	gameboard = malloc(sizeof(char *) * (checker->width + 1));
 	fd = open(arg, O_RDONLY);
-	line = get_next_line(fd);
-	gameboard[i] = line;
+	if (fd == -1 || !gameboard)
+		return (free(gameboard), NULL);
+	gameboard[i] = get_next_line(fd);
+	if (!gameboard[i])
+		return (freechar(gameboard), NULL);
 	i++;
-	while (line)
+	while (i < checker->width)
 	{
-		line = get_next_line(fd);
-		gameboard[i] = line;
+		gameboard[i] = get_next_line(fd);
+		if (!gameboard[i])
+			return (freechar(gameboard), NULL);
 		i++;
 	}
+	gameboard[i] = NULL;
+	close(fd);
 	return (gameboard);
 }
