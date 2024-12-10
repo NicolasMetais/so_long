@@ -7,12 +7,15 @@ SRCS = 	src/so_long.c \
 		src/bfs.c \
 		src/bfs_bis.c \
 		src/run_game.c \
+		src/map_gen.c \
+		src/build_map.c \
+		src/transparency.c \
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 NAME = so_long
 
@@ -23,10 +26,10 @@ LIB = ./lib/libft/libft.a
 all: $(NAME)
 
 lib:
-	@make -sC ./lib/libft
+	@make -C ./lib/libft
 
 mlx:
-	@make -sC ./minilibx-linux
+	@make -C ./minilibx-linux
 
 $(NAME): lib mlx $(OBJS)
 	$(CC) $(OBJS) ./lib/libft/libft.a ./minilibx-linux/libmlx.a -lX11 -lXext -o $(NAME)

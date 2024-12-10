@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/09 05:32:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:35:55 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_param
 	size_t	spawnx;
 	size_t	spawny;
 	size_t	walkable;
+	size_t	groundcount;
+	size_t	wallcount;
 }	t_param;
 
 typedef struct s_checkpoint
@@ -46,6 +48,21 @@ typedef struct s_locate
 	size_t	x;
 	size_t	y;
 }	t_locate;
+
+typedef enum s_type
+{
+	EMPTY = '0',
+	WALL = '1',
+	PLAYER = 'P',
+	COLLECT = 'C',
+	EXIT = 'E'
+}	t_type;
+
+typedef struct s_pos
+{
+	size_t	y;
+	size_t	x;
+}	t_pos;
 
 typedef struct s_map
 {
@@ -65,14 +82,35 @@ typedef struct s_player
 
 typedef struct s_collect_img
 {
-	void	*img;
+	void	*Cregular_img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_collect_img;
 
 typedef struct s_wall_img
 {
 	void	*side_img;
-	void	*column_img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_wall_img;
+
+typedef struct s_exit_img
+{
+	void	*img;
+}	t_exit_img;
+
+typedef struct s_ground_img
+{
+	void	*ground_img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_ground_img;
 
 typedef struct s_game
 {
@@ -80,35 +118,22 @@ typedef struct s_game
 	void			*win;
 	t_map			**map;
 	t_collect_img	*collect_img;
-	t_player		player;
+	t_wall_img		*wall_img;
+	t_ground_img	*ground;
+	t_player		*player;
+	t_exit_img		*exit;
 }	t_game;
 
-
-
-typedef enum s_type
-{
-	EMPTY = '0',
-	WALL = '1',
-	PLAYER = 'P',
-	COLLECT = 'C',
-	EXIT = 'E'
-}	t_type;
-
-typedef struct s_pos
-{
-	size_t	y;
-	size_t	x;
-}	t_pos;
-
 void	run_game(char **gameboard, t_param *checker);
-void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab
-			, t_param *checker);
+void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab,
+			t_param *checker);
 void	freecheckpoint(t_checkpoint *checkpoint);
 void	freechar(char **table);
 void	freesizet(size_t **table, size_t checker);
 size_t	version_check(char *arg);
 void	bfs(size_t **pathtab, t_param *checker,
 			t_checkpoint *checkpoint);
+void	build_map(t_game *game, t_param *checker, char **gameboard);
 size_t	**dupboard(char **gameboard, t_param *checker);
 char	**table_construct(char **gameboard, char *arg, t_param *checker);
 size_t	map_check(char **gameboard, t_param *checker);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/09 04:16:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/10 02:18:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	init(t_param *checker)
 	checker->spawn = 0;
 	checker->width = 0;
 	checker->lenght = 0;
+	checker->wallcount = 0;
+	checker->groundcount = 0;
 }
 
 int	main(void)
@@ -73,7 +75,7 @@ int	main(void)
 		error = map_check(gameboard, &checker);
 		if (error != 1)
 			return (freechar(gameboard), 1);
-		run_game(gameboard, checker);
+		run_game(gameboard, &checker);
 		freechar(gameboard);
 		
 
