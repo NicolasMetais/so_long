@@ -9,7 +9,8 @@ SRCS = 	src/so_long.c \
 		src/run_game.c \
 		src/map_gen.c \
 		src/build_map.c \
-		src/transparency.c \
+		src/coin_transparency.c \
+		src/player_transparency.c \
 
 OBJS = $(SRCS:.c=.o)
 

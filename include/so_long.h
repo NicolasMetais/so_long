@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/10 18:35:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/11 00:07:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,29 @@ typedef struct s_player
 {
 	t_map	*tile;
 	void	*img;
+	void	*iaddr;
+	void	*player;
+	void	*paddr;
+	int		ibpp;
+	int		pbpp;
+	int		iline_len;
+	int		pline_len;
+	int		iendian;
+	int		pendian;
 }	t_player;
 
 typedef struct s_collect_img
 {
-	void	*Cregular_img;
-	void	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
+	void	*img;
+	void	*iaddr;
+	void	*coin;
+	void	*caddr;
+	int		ibpp;
+	int		cbpp;
+	int		iline_len;
+	int		cline_len;
+	int		iendian;
+	int		cendian;
 }	t_collect_img;
 
 typedef struct s_wall_img
@@ -105,7 +119,7 @@ typedef struct s_exit_img
 
 typedef struct s_ground_img
 {
-	void	*ground_img;
+	void	*img;
 	void	*addr;
 	int		bpp;
 	int		line_len;
