@@ -11,6 +11,8 @@ SRCS = 	src/so_long.c \
 		src/build_map.c \
 		src/coin_transparency.c \
 		src/player_transparency.c \
+		src/game_event.c \
+		src/move_charac.c \
 
 OBJS = $(SRCS:.c=.o)
 

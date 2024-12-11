@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/11 00:07:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:24:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,6 @@ typedef struct s_locate
 	size_t	y;
 }	t_locate;
 
-typedef enum s_type
-{
-	EMPTY = '0',
-	WALL = '1',
-	PLAYER = 'P',
-	COLLECT = 'C',
-	EXIT = 'E'
-}	t_type;
-
 typedef struct s_pos
 {
 	size_t	y;
@@ -66,7 +57,7 @@ typedef struct s_pos
 
 typedef struct s_map
 {
-	t_type			type;
+	char			type;
 	t_pos			pos;
 	struct s_map	*left;
 	struct s_map	*right;
@@ -77,6 +68,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_map	*tile;
+	t_pos	*pos;
 	void	*img;
 	void	*iaddr;
 	void	*player;
@@ -130,6 +122,7 @@ typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
+	size_t			countmove;
 	t_map			**map;
 	t_collect_img	*collect_img;
 	t_wall_img		*wall_img;
@@ -147,6 +140,7 @@ void	freesizet(size_t **table, size_t checker);
 size_t	version_check(char *arg);
 void	bfs(size_t **pathtab, t_param *checker,
 			t_checkpoint *checkpoint);
+void	game_event(t_game *game, t_param *checker);
 void	build_map(t_game *game, t_param *checker, char **gameboard);
 size_t	**dupboard(char **gameboard, t_param *checker);
 char	**table_construct(char **gameboard, char *arg, t_param *checker);

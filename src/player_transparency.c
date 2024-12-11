@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 00:09:26 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/11 01:17:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:52:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,8 @@ void	player_transparency(t_player *player)
 	i = 0;
 	player->iaddr = mlx_get_data_addr(player->img, &(player->ibpp),
 			&(player->iline_len), &(player->iendian));
-	if (!player->iaddr)
-	{
-		printf("pas def");
-		return ;
-	}
 	player->paddr = mlx_get_data_addr(player->player, &(player->pbpp),
 			&(player->pline_len), &(player->pendian));
-	if (!player->paddr)
-	{
-		printf("pas def");
-		return ;
-	}
 	while (i < 32)
 	{
 		j = 0;

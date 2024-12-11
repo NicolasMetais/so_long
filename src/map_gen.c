@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:29:30 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/09 14:52:34 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:12:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,12 @@ t_map	**map_gen(char **gameboard, t_param *checker)
 		x = 0;
 		while (x < checker->lenght)
 		{
-			tile[y][x].type = gameboard[y][x]; //fonction de type pour player ou collect
+			tile[y][x].type = gameboard[y][x];
 			tile[y][x].pos.y = y;
 			tile[y][x].pos.x = x;
 			adjacent_tiles(tile, y, x);
 			x++;
 		}
-		tile[y][x].type = 0;
 		y++;
 	}
 	tile[y] = 0;

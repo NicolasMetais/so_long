@@ -6,31 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:18:26 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/10 04:33:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:24:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 t_map	**map_gen(char **gameboard, t_param *checker);
-
-int	handle_keypress(int keysym, t_game *game)
-{
-	int count;
-
-	count = 0;
-	if (keysym == XK_Escape)
-		mlx_destroy_window(game->mlx, game->win);
-	count++;
-	printf("futur compteur tqt: %d\n", count);
-	return (0);
-}
-
-int	handle_no_event(void *data)
-{
-	data = NULL;
-	return (0);
-}
 
 void	type_count(char **gameboard, t_param *checker)
 {
@@ -68,8 +50,7 @@ void	run_game(char **gameboard, t_param *checker)
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, 1920, 1080, "So_long");
 	build_map(&game, checker, gameboard);
-	mlx_hook(game.win, KeyPress, KeyPressMask, &handle_keypress, &game);
-	mlx_loop_hook(game.mlx, &handle_no_event, &game);
+	game_event(&game, checker);
 	mlx_loop(game.mlx);
 	mlx_destroy_display(game.mlx);
 	free(game.mlx);

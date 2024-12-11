@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:09 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/11 01:21:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/11 14:31:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ void	insert_map_img(t_game *game, size_t x, size_t y, char **gameboard)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->exit->img, x * 32, y * 32);
 	else if (type == 'P')
+	{
+		game->player->pos = malloc(sizeof(t_pos));
+		game->player->pos->x = x;
+		game->player->pos->y = y;
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->player->img, x * 32, y * 32);
+	}
 	else if (type == 'C')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->collect_img->img, x * 32, y * 32);
@@ -104,8 +109,8 @@ void	open_img(t_game *game)
 
 void	build_map(t_game *game, t_param *checker, char **gameboard)
 {
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	game->wall_img = malloc (sizeof(t_wall_img) * checker->wallcount);
 	game->ground = malloc (sizeof(t_ground_img) * checker->groundcount);
@@ -116,10 +121,10 @@ void	build_map(t_game *game, t_param *checker, char **gameboard)
 		return ;
 	open_img(game);
 	y = 0;
-	while (y < checker->width)
+	while (y < (int)checker->width)
 	{
 		x = 0;
-		while (x <= checker->lenght)
+		while (x <= (int)checker->lenght)
 		{
 			insert_map_img(game, x, y, gameboard);
 			x++;
