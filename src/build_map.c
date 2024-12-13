@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:09 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 17:59:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:07:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	insert_map_img(t_game *game, size_t x, size_t y, char **gameboard)
 	{
 		game->player->pos->x = x;
 		game->player->pos->y = y;
-		printf("X: %zu\n Y:  %zu",game->player->pos->x, game->player->pos->y);
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->playeri.img, x * 32, y * 32);
 	}
