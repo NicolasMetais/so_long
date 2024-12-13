@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:30 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 17:59:02 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:51:57 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int	handle_destroy(t_game *game)
 {
 	freeimg(game);
 	mlx_destroy_window(game->mlx, game->win);
-	mlx_loop_end(game->mlx);
-	freetile(game->map, game->size);
 	mlx_destroy_display(game->mlx);
+	freetile(game->map, game->size);
 	free(game->mlx);
 	exit(0);
 	return (0);

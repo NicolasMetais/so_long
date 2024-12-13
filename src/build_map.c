@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:09 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 18:07:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:48:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ void	freeimg(t_game *game)
 	mlx_destroy_image(game->mlx, game->wall_img.img);
 	mlx_destroy_image(game->mlx, game->ground.img);
 	mlx_destroy_image(game->mlx, game->collect_img.img);
-	mlx_destroy_image(game->mlx, game->exit.img);
 	mlx_destroy_image(game->mlx, game->coini.img);
 	mlx_destroy_image(game->mlx, game->playeri.img);
 	mlx_destroy_image(game->mlx, game->player->player_img.img);
 	mlx_destroy_image(game->mlx, game->exit.img);
 	mlx_destroy_image(game->mlx, game->pstair.img);
+	free(game->player->pos);
+	free(game->player);
 }
 
 void	insert_map_img(t_game *game, size_t x, size_t y, char **gameboard)
@@ -118,23 +119,27 @@ void	open_img(t_game *game)
 // 	mlx_destroy_image(game->mlx, new_img);
 // }
 
-t_game	*alloc_img(t_game *game)
+int	alloc_img(t_game *game)
 {
 	game->player = malloc (sizeof(t_player));
-	game->player->pos = malloc(sizeof(t_pos));
 	if (!game->player)
-		return (freeimg(game), NULL);
-	return (game);
+		return (0);
+	game->player->pos = malloc(sizeof(t_pos));
+	if (!game->player->pos)
+		return (0);
+	game->player->player_img.img = NULL;
+	return (1);
 }
 
-void	build_map(t_game *game, t_param *checker, char **gameboard)
+int	build_map(t_game *game, t_param *checker, char **gameboard)
 {
 	int	y;
 	int	x;
+	int	fail;
 
-	game = alloc_img(game);
-	 if (!game)
-	 	return ;
+	fail = alloc_img(game);
+	if (!game)
+		return (0);
 	open_img(game);
 	y = 0;
 	while (y < (int)checker->width)
@@ -147,4 +152,5 @@ void	build_map(t_game *game, t_param *checker, char **gameboard)
 		}
 		y++;
 	}
+	return (1);
 }

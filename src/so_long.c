@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/12 22:39:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:08:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ void	init(t_param *checker)
 int	main(void)
 {
 	char	**gameboard;
+	int		fail;
 	t_param	checker;
 	char	*file;
 	size_t	error;
 
-	file = "little.ber";
+	file = "test.ber";
 	init(&checker);
 	gameboard = NULL;
 	/*if (ac == 2)
@@ -72,10 +73,14 @@ int	main(void)
 		if (version_check(file) == 1)
 			return (write(2, "Error \n Bad file extension", 27));
 		gameboard = table_construct(gameboard, file, &checker);
+		if (!gameboard)
+			return (0);
 		error = map_check(gameboard, &checker);
 		if (error != 1)
 			return (freechar(gameboard), 1);
-		run_game(gameboard, &checker);
+		fail = run_game(gameboard, &checker);
 		freechar(gameboard);
+		if (!fail)
+			return (0);
 	//}
 }

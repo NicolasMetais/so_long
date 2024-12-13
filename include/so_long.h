@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 04:12:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:29:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_game
 	size_t		size;
 }	t_game;
 
-void	run_game(char **gameboard, t_param *checker);
+int		run_game(char **gameboard, t_param *checker);
 void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab,
 			t_param *checker);
 void	freecheckpoint(t_checkpoint *checkpoint);
@@ -110,7 +110,7 @@ size_t	version_check(char *arg);
 void	bfs(size_t **pathtab, t_param *checker,
 			t_checkpoint *checkpoint);
 void	game_event(t_game *game, t_param *checker);
-void	build_map(t_game *game, t_param *checker, char **gameboard);
+int		build_map(t_game *game, t_param *checker, char **gameboard);
 size_t	**dupboard(char **gameboard, t_param *checker);
 char	**table_construct(char **gameboard, char *arg, t_param *checker);
 size_t	map_check(char **gameboard, t_param *checker);
