@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 13:29:37 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/08 17:27:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/12 21:52:45 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,21 @@ void	rectangle_check(char **gameboard, t_param *checker)
 
 	i = 0;
 	j = 0;
-	while (i < checker->width)
+	while (gameboard[i])
 	{
 		j = 0;
-		while (gameboard[i][j] != '\n' && gameboard[i][j])
+		while (gameboard[i][j])
 			j++;
 		if (i == 0)
 			maxsize = j;
-		if (maxsize != j)
+		if (maxsize != j && !(checker->width - 1 == i && maxsize == j + 1))
 		{
 			checker->rectangle = 1;
 			return ;
 		}
 		i++;
 	}
-	checker->lenght = j - 1;
+	checker->lenght = j;
 }
 
 void	wall_check(char **gameboard, t_param *checker)
@@ -72,7 +72,7 @@ void	wall_check(char **gameboard, t_param *checker)
 	size_t	j;
 
 	i = 0;
-	while (i < checker->width)
+	while (gameboard[i])
 	{
 		j = 0;
 		while (gameboard[i][j])
@@ -83,7 +83,7 @@ void	wall_check(char **gameboard, t_param *checker)
 				gameboard[checker->width - 1][j] != '1')
 					checker->wall = 1;
 				if (gameboard[i][0] != '1' ||
-				gameboard[i][checker->lenght] != '1')
+				gameboard[i][checker->lenght - 1] != '1')
 					checker->wall = 1;
 			}
 			j++;

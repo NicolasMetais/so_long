@@ -9,10 +9,10 @@ SRCS = 	src/so_long.c \
 		src/run_game.c \
 		src/map_gen.c \
 		src/build_map.c \
-		src/coin_transparency.c \
-		src/player_transparency.c \
+		src/transparency.c \
 		src/game_event.c \
 		src/move_charac.c \
+		src/update_floor.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -29,16 +29,16 @@ LIB = ./lib/libft/libft.a
 all: $(NAME)
 
 lib:
-	@make -C ./lib/libft
+	make -C ./lib/libft
 
 mlx:
-	@make -C ./minilibx-linux
+	make -C ./minilibx-linux
 
 $(NAME): lib mlx $(OBJS)
 	$(CC) $(OBJS) ./lib/libft/libft.a ./minilibx-linux/libmlx.a -lX11 -lXext -o $(NAME)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
 	rm -rf *.o

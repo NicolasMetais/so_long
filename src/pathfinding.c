@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:01:40 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/08 21:40:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/12 01:58:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	getcheckpoints(char **gameboard, t_checkpoint *checkpoint,
 	i++;
 	}
 }
-
 
 void	pathfinding(char **gameboard, t_param *checker)
 {

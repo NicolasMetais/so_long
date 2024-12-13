@@ -1,52 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_transparency.c                              :+:      :+:    :+:   */
+/*   transparency.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 00:09:26 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/11 13:52:15 by nmetais          ###   ########.fr       */
+/*   Created: 2024/12/10 16:24:49 by nmetais           #+#    #+#             */
+/*   Updated: 2024/12/12 01:58:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	put_on_gd(t_player *player, size_t y, size_t x, int color)
+void	put_on_bg(t_img *bg, size_t y, size_t x, int color)
 {
 	char	*change_pix;
 
 	if (color == (int)0x00FF00)
 		return ;
-	change_pix = player->iaddr + (y * player->iline_len + x * (player->ibpp / 8));
+	change_pix = bg->addr + (y * bg->line_len + x * (bg->bpp / 8));
 	*(unsigned int *) change_pix = color;
 }
 
-unsigned int	get_pl_pxl(t_player *player, size_t x, size_t y)
+unsigned int	get_img_pxl(t_img *stickonbg, size_t x, size_t y)
 {
-	return (*(unsigned int *)(player->paddr
-		+ (y * player->pline_len + x * (player->pbpp / 8))));
+	return (*(unsigned int *)(stickonbg->addr
+		+ (y * stickonbg->line_len + x * (stickonbg->bpp / 8))));
 }
 
-void	player_transparency(t_player *player)
+void	transparency(t_img *bg, t_img *stickonbg)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	player->iaddr = mlx_get_data_addr(player->img, &(player->ibpp),
-			&(player->iline_len), &(player->iendian));
-	player->paddr = mlx_get_data_addr(player->player, &(player->pbpp),
-			&(player->pline_len), &(player->pendian));
+	bg->addr = mlx_get_data_addr(bg->img, &(bg->bpp),
+			&(bg->line_len), &(bg->endian));
+	stickonbg->addr = mlx_get_data_addr(stickonbg->img, &(stickonbg->bpp),
+			&(stickonbg->line_len), &(stickonbg->endian));
 	while (i < 32)
 	{
 		j = 0;
 		while (j < 32)
 		{
-			put_on_gd(player, i, j, get_pl_pxl(player, j, i));
+			put_on_bg(bg, i, j, get_img_pxl(stickonbg, j, i));
 			j++;
 		}
 		i++;
 	}
 }
-

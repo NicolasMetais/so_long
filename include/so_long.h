@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/11 16:24:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/13 04:12:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,70 +65,39 @@ typedef struct s_map
 	struct s_map	*down;
 }				t_map;
 
+typedef struct s_img
+{
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_player
 {
 	t_map	*tile;
 	t_pos	*pos;
-	void	*img;
-	void	*iaddr;
-	void	*player;
-	void	*paddr;
-	int		ibpp;
-	int		pbpp;
-	int		iline_len;
-	int		pline_len;
-	int		iendian;
-	int		pendian;
+	t_img	player_img;
 }	t_player;
-
-typedef struct s_collect_img
-{
-	void	*img;
-	void	*iaddr;
-	void	*coin;
-	void	*caddr;
-	int		ibpp;
-	int		cbpp;
-	int		iline_len;
-	int		cline_len;
-	int		iendian;
-	int		cendian;
-}	t_collect_img;
-
-typedef struct s_wall_img
-{
-	void	*side_img;
-	void	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_wall_img;
-
-typedef struct s_exit_img
-{
-	void	*img;
-}	t_exit_img;
-
-typedef struct s_ground_img
-{
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_ground_img;
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
-	size_t			countmove;
-	t_map			**map;
-	t_collect_img	*collect_img;
-	t_wall_img		*wall_img;
-	t_ground_img	*ground;
-	t_player		*player;
-	t_exit_img		*exit;
+	void		*mlx;
+	void		*win;
+	int			countmove;
+	size_t		cmax;
+	t_map		**map;
+	t_img		collect_img;
+	t_img		wall_img;
+	t_player	*player;
+	t_img		exit;
+	t_img		playeri;
+	size_t		countcoin;
+	t_img		ground;
+	t_img		coini;
+	t_img		pstair;
+	size_t		size;
 }	t_game;
 
 void	run_game(char **gameboard, t_param *checker);

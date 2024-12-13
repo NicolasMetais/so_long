@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/11 13:27:18 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/12 22:39:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(void)
 	char	*file;
 	size_t	error;
 
-	file = "test.ber";
+	file = "little.ber";
 	init(&checker);
 	gameboard = NULL;
 	/*if (ac == 2)
@@ -77,7 +77,5 @@ int	main(void)
 			return (freechar(gameboard), 1);
 		run_game(gameboard, &checker);
 		freechar(gameboard);
-		
-
 	//}
 }

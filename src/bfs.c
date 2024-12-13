@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 02:39:10 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/08 21:37:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/12 01:59:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	process_queue(size_t **queue, size_t **pathtab, t_locate *locate,
 	valid_neigh(pathtab[locate->y][locate->x - 1], &neighbor);
 	valid_neigh(pathtab[locate->y][locate->x + 1], &neighbor);
 	neighbor.i = 0;
-
 	while ((*queue)[neighbor.i] != 0)
 	{
 		(*queue)[neighbor.i] = (*queue)[neighbor.i + 1];
