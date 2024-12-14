@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 22:11:45 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:42:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:19:06 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Recherche la dernière occurrence du caractère */
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {

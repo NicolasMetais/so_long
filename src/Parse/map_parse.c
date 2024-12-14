@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 13:29:37 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/12 21:52:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:51:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	setupcollector(char **gameboard, t_param *checker)
 {
@@ -97,6 +97,8 @@ size_t	map_check(char **gameboard, t_param *checker)
 	rectangle_check(gameboard, checker);
 	if (checker->rectangle != 0)
 		return (write(2, "Error\n wrong map size", 22));
+	if (checker->lenght * checker->width > 1920)
+		return (write(2, "Error\n map will be rendered outside screen", 43));
 	setupcollector(gameboard, checker);
 	if (checker->invalidchar == 1)
 		return (write(2, "Error \ninvalid char\n", 21));

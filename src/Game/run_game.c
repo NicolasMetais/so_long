@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:18:26 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:41:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:52:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 t_map	**map_gen(char **gameboard, t_param *checker);
 int		handle_destroy(t_game *game);
@@ -48,6 +48,7 @@ void	type_count(char **gameboard, t_param *checker)
 
 void	init_img(t_game *game)
 {
+	game->failimg = 0;
 	game->wall_img.img = NULL;
 	game->ground.img = NULL;
 	game->coini.img = NULL;
@@ -57,13 +58,13 @@ void	init_img(t_game *game)
 	game->pstair.img = NULL;
 }
 
-
 int	run_game(char **gameboard, t_param *checker)
 {
 	t_game	game;
 	int		fail;
 
 	init_img(&game);
+	game.size = checker->width;
 	type_count(gameboard, checker);
 	game.map = map_gen(gameboard, checker);
 	game.mlx = mlx_init();
@@ -75,10 +76,13 @@ int	run_game(char **gameboard, t_param *checker)
 		return (0);
 	fail = build_map(&game, checker, gameboard);
 	freechar(gameboard);
-	if (!fail)
+	if (fail == 1)
+	{
+		write(1, "Error\n File error check the textures paths", 43);
 		handle_destroy(&game);
+	}
 	game.cmax = checker->collect;
 	game_event(&game, checker);
 	mlx_loop(game.mlx);
-	return (1);
+	return (0);
 }

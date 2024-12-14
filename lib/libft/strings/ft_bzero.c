@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 18:28:59 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:03:48 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:18:08 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* bzero - Écrire des octets de valeur zéro dans un bloc d'octets */
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

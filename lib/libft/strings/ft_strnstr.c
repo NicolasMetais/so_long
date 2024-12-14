@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 14:03:40 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:04:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:19:02 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* locate a substring in a string */
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {

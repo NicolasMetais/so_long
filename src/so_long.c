@@ -6,13 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:08:15 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:51:25 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
-#include <stdio.h> // A DELETE
-#include <fcntl.h>
+#include "so_long.h"
 
 void	freechar(char **table)
 {
@@ -42,6 +40,16 @@ void	freesizet(size_t **table, size_t checker)
 	free(table);
 }
 
+size_t	version_check(char *arg)
+{
+	char	*version;
+
+	version = ft_strnstr(arg, ".ber", ft_strlen(arg));
+	if (version != NULL)
+		return (0);
+	return (1);
+}
+
 void	init(t_param *checker)
 {
 	checker->rectangle = 0;
@@ -57,22 +65,20 @@ void	init(t_param *checker)
 	checker->groundcount = 0;
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	char	**gameboard;
 	int		fail;
 	t_param	checker;
-	char	*file;
 	size_t	error;
 
-	file = "test.ber";
 	init(&checker);
 	gameboard = NULL;
-	/*if (ac == 2)
-	{*/
-		if (version_check(file) == 1)
+	if (ac == 2)
+	{
+		if (version_check(av[1]) == 1)
 			return (write(2, "Error \n Bad file extension", 27));
-		gameboard = table_construct(gameboard, file, &checker);
+		gameboard = table_construct(gameboard, av[1], &checker);
 		if (!gameboard)
 			return (0);
 		error = map_check(gameboard, &checker);
@@ -82,5 +88,5 @@ int	main(void)
 		freechar(gameboard);
 		if (!fail)
 			return (0);
-	//}
+	}
 }

@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:29:30 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:00:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:50:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	freetile(t_map **tile, size_t size)
 {

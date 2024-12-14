@@ -6,14 +6,14 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:08:17 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:29:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:17:47 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "../../include/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 # include <stdint.h>
 

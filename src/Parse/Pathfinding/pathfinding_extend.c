@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 21:21:01 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/08 21:57:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:50:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 size_t	extend_dupboard(char *gameboard, size_t *pathtab, size_t k
 	, t_param *checker)

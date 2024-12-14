@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:34:09 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:03:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:16:59 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

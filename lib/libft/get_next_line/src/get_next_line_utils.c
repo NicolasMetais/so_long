@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 23:52:47 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/08 17:29:52 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:54:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/get_next_line.h"
 
-size_t	get_strlen(const char *s)
+size_t	gt_strlen(const char *s)
 {
 	size_t		i;
 
@@ -22,7 +22,7 @@ size_t	get_strlen(const char *s)
 	return (i);
 }
 
-char	*get_substr(char const *s, unsigned int start, size_t len)
+char	*gt_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;
@@ -32,10 +32,10 @@ char	*get_substr(char const *s, unsigned int start, size_t len)
 	i = start;
 	if (!s)
 		return (NULL);
-	if (start >= get_strlen(s))
+	if (start >= gt_strlen(s))
 		len = 0;
-	else if (len > get_strlen(s) - start)
-		len = get_strlen(s) - start;
+	else if (len > gt_strlen(s) - start)
+		len = gt_strlen(s) - start;
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
@@ -49,7 +49,7 @@ char	*get_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*get_strchr(const char *s, int c)
+char	*gt_strchr(const char *s, int c)
 {
 	int				i;
 	unsigned char	d;
@@ -59,7 +59,7 @@ char	*get_strchr(const char *s, int c)
 	i = 0;
 	d = (unsigned char) c;
 	if (d == '\0')
-		return ((char *)s + get_strlen(s));
+		return ((char *)s + gt_strlen(s));
 	while (s[i])
 	{
 		if (s[i] == d)
@@ -69,7 +69,7 @@ char	*get_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*get_strjoin( char *s1, char*s2)
+char	*gt_strjoin( char *s1, char*s2)
 {
 	int		i;
 	size_t	j;
@@ -83,15 +83,15 @@ char	*get_strjoin( char *s1, char*s2)
 			return (NULL);
 		s1[0] = '\0';
 	}
-	str = malloc(sizeof(char) * ((int)get_strlen(s1) + (int)get_strlen(s2) + 1));
+	str = malloc(sizeof(char) * ((int)gt_strlen(s1) + (int)gt_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
-	size1 = get_strlen(s1);
+	size1 = gt_strlen(s1);
 	i = -1;
 	while (i++, i < size1)
 		str[i] = s1[i];
 	j = 0;
-	while (i < size1 + (int)get_strlen(s2))
+	while (i < size1 + (int)gt_strlen(s2))
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	free(s1);

@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:21:41 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:43:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:18:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Rechercher un caractère dans une chaîne  */
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:00:42 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 17:19:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:50:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	update_floor_up(t_map smaller, t_game *game);
 void	update_floor_down(t_map smaller, t_game *game);

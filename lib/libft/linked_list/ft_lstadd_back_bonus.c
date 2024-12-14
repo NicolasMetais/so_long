@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:47:57 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:02:54 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:16:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

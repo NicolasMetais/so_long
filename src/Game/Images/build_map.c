@@ -6,27 +6,30 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:57:09 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:48:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:51:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
-
-void	transparency(t_img *bg, t_img *stickonbg);
-void	player_transparency(t_player *player);
+#include "so_long.h"
 
 void	freeimg(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->wall_img.img);
-	mlx_destroy_image(game->mlx, game->ground.img);
-	mlx_destroy_image(game->mlx, game->collect_img.img);
-	mlx_destroy_image(game->mlx, game->coini.img);
-	mlx_destroy_image(game->mlx, game->playeri.img);
-	mlx_destroy_image(game->mlx, game->player->player_img.img);
-	mlx_destroy_image(game->mlx, game->exit.img);
-	mlx_destroy_image(game->mlx, game->pstair.img);
-	free(game->player->pos);
-	free(game->player);
+	if (game->wall_img.img)
+		mlx_destroy_image(game->mlx, game->wall_img.img);
+	if (game->ground.img)
+		mlx_destroy_image(game->mlx, game->ground.img);
+	if (game->collect_img.img)
+		mlx_destroy_image(game->mlx, game->collect_img.img);
+	if (game->coini.img)
+		mlx_destroy_image(game->mlx, game->coini.img);
+	if (game->playeri.img)
+		mlx_destroy_image(game->mlx, game->playeri.img);
+	if (game->player->player_img.img)
+		mlx_destroy_image(game->mlx, game->player->player_img.img);
+	if (game->exit.img)
+		mlx_destroy_image(game->mlx, game->exit.img);
+	if (game->pstair.img)
+		mlx_destroy_image(game->mlx, game->pstair.img);
 }
 
 void	insert_map_img(t_game *game, size_t x, size_t y, char **gameboard)
@@ -55,8 +58,9 @@ void	insert_map_img(t_game *game, size_t x, size_t y, char **gameboard)
 			game->coini.img, x * 32, y * 32);
 }
 
-void	open_img(t_game *game)
+int	open_img(t_game *game)
 {
+	int		failer;
 	int		width;
 	int		len;
 
@@ -66,21 +70,15 @@ void	open_img(t_game *game)
 			"GameSprites/Wall.xpm", &width, &len);
 	game->ground.img = mlx_xpm_file_to_image(game->mlx,
 			"GameSprites/Ground.xpm", &width, &len);
-	game->coini.img = mlx_xpm_file_to_image(game->mlx,
-			"GameSprites/Ground.xpm", &width, &len);
-	game->collect_img.img = mlx_xpm_file_to_image(game->mlx,
-			"GameSprites/Coin.xpm", &width, &len);
-	transparency(&game->coini, &game->collect_img);
-	game->playeri.img = mlx_xpm_file_to_image(game->mlx,
-			"GameSprites/Ground.xpm", &width, &len);
-	game->player->player_img.img = mlx_xpm_file_to_image(game->mlx,
-			"GameSprites/RedDino.xpm", &width, &len);
-	transparency(&game->playeri, &game->player->player_img);
-	game->exit.img = mlx_xpm_file_to_image(game->mlx,
-			"GameSprites/Exit.xpm", &width, &len);
-	game->pstair.img = mlx_xpm_file_to_image(game->mlx,
-			"GameSprites/Exit.xpm", &width, &len);
-	transparency(&game->pstair, &game->player->player_img);
+	if (!game->wall_img.img || !game->ground.img)
+		return (1);
+	failer = coin_transparency(game, width, len);
+	if (failer == 1)
+		return (1);
+	failer = player_transparency(game, width, len);
+	if (failer == 1)
+		return (1);
+	return (0);
 }
 
 // void	zoom(t_game *game, void *img, int x, int y)
@@ -123,12 +121,12 @@ int	alloc_img(t_game *game)
 {
 	game->player = malloc (sizeof(t_player));
 	if (!game->player)
-		return (0);
+		return (1);
 	game->player->pos = malloc(sizeof(t_pos));
 	if (!game->player->pos)
-		return (0);
+		return (1);
 	game->player->player_img.img = NULL;
-	return (1);
+	return (0);
 }
 
 int	build_map(t_game *game, t_param *checker, char **gameboard)
@@ -137,10 +135,13 @@ int	build_map(t_game *game, t_param *checker, char **gameboard)
 	int	x;
 	int	fail;
 
+	fail = 0;
 	fail = alloc_img(game);
-	if (!game)
-		return (0);
-	open_img(game);
+	if (fail == 1)
+		return (1);
+	fail = open_img(game);
+	if (fail == 1)
+		return (1);
 	y = 0;
 	while (y < (int)checker->width)
 	{
@@ -152,5 +153,5 @@ int	build_map(t_game *game, t_param *checker, char **gameboard)
 		}
 		y++;
 	}
-	return (1);
+	return (0);
 }

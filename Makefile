@@ -1,24 +1,23 @@
 SRCS = 	src/so_long.c \
-		src/error_manager.c \
-		src/map_parse.c \
 		src/gameboard.c \
-		src/pathfinding.c \
-		src/pathfinding_extend.c \
-		src/bfs.c \
-		src/bfs_bis.c \
-		src/run_game.c \
-		src/map_gen.c \
-		src/build_map.c \
-		src/transparency.c \
-		src/game_event.c \
-		src/move_charac.c \
-		src/update_floor.c \
+		src/Parse/map_parse.c \
+		src/Parse/Pathfinding/pathfinding.c \
+		src/Parse/Pathfinding/pathfinding_extend.c \
+		src/Parse/Pathfinding/bfs.c \
+		src/Parse/Pathfinding/bfs_bis.c \
+		src/Game/run_game.c \
+		src/Game/map_gen.c \
+		src/Game/game_event.c \
+		src/Game/move_charac.c \
+		src/Game/update_floor.c \
+		src/Game/Images/build_map.c \
+		src/Game/Images/transparency.c \
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Iminilibx-linux -Iinclude
 
 NAME = so_long
 

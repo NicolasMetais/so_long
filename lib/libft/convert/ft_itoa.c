@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:32:51 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:02:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:15:57 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static	int	getintsize(long cn)
 {

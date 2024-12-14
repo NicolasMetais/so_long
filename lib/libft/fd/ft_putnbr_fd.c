@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:53:11 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:02:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:16:08 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

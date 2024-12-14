@@ -6,15 +6,16 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:29:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:42:52 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../lib/libft/include/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "libft.h"
+# include <fcntl.h>
+# include "mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
 
@@ -86,6 +87,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	int			countmove;
+	int			failimg;
 	size_t		cmax;
 	t_map		**map;
 	t_img		collect_img;
@@ -103,6 +105,9 @@ typedef struct s_game
 int		run_game(char **gameboard, t_param *checker);
 void	locatepos(t_locate *locate, size_t actualpos, size_t **pathtab,
 			t_param *checker);
+void	transparency(t_img *bg, t_img *stickonbg);
+int		player_transparency(t_game *game, int width, int len);
+int		coin_transparency(t_game *game,	int width, int len);
 void	freecheckpoint(t_checkpoint *checkpoint);
 void	freechar(char **table);
 void	freesizet(size_t **table, size_t checker);

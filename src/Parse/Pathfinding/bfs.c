@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 02:39:10 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/12 01:59:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:50:55 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 size_t	visit(size_t pathtab, size_t *visited)
 {

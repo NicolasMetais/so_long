@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 23:52:45 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 19:41:24 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:54:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ char	*read_a_line(int fd, char *buffer)
 	toread = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!toread)
 		return (NULL);
-	while (!get_strchr(buffer, '\n') && pos != 0)
+	while (!gt_strchr(buffer, '\n') && pos != 0)
 	{
 		pos = read(fd, toread, BUFFER_SIZE);
 		if (pos < 0)
 			return (free(toread), NULL);
 		toread[pos] = '\0';
-		buffer = get_strjoin(buffer, toread);
+		buffer = gt_strjoin(buffer, toread);
 	}
 	free(toread);
 	return (buffer);
@@ -47,7 +47,7 @@ char	*cutline(char *buffer)
 		i++;
 	if (buffer[i] == '\n')
 		size = 1;
-	toprint = get_substr(buffer, 0, i + size);
+	toprint = gt_substr(buffer, 0, i + size);
 	if (!toprint)
 		return (NULL);
 	return (toprint);
@@ -69,7 +69,7 @@ char	*setupbuffer(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	size = get_strlen(buffer) - i + 1;
+	size = gt_strlen(buffer) - i + 1;
 	newbuff = malloc (size * sizeof(char));
 	if (!newbuff)
 		return (NULL);

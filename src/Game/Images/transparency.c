@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	put_on_bg(t_img *bg, size_t y, size_t x, int color)
 {
@@ -48,4 +48,35 @@ void	transparency(t_img *bg, t_img *stickonbg)
 		}
 		i++;
 	}
+}
+
+int	coin_transparency(t_game *game,	int width, int len)
+{
+	game->coini.img = mlx_xpm_file_to_image(game->mlx,
+			"GameSprites/Ground.xpm", &width, &len);
+	game->collect_img.img = mlx_xpm_file_to_image(game->mlx,
+			"GameSprites/Coin.xpm", &width, &len);
+	if (!game->coini.img || !game->collect_img.img)
+		return (1);
+	transparency(&game->coini, &game->collect_img);
+	return (0);
+}
+
+int	player_transparency(t_game *game, int width, int len)
+{
+	game->playeri.img = mlx_xpm_file_to_image(game->mlx,
+			"GameSprites/Ground.xpm", &width, &len);
+	game->player->player_img.img = mlx_xpm_file_to_image(game->mlx,
+			"GameSprites/RedDino.xpm", &width, &len);
+	if (!game->playeri.img || !game->player->player_img.img)
+		return (1);
+	transparency(&game->playeri, &game->player->player_img);
+	game->exit.img = mlx_xpm_file_to_image(game->mlx,
+			"GameSprites/Exit.xpm", &width, &len);
+	game->pstair.img = mlx_xpm_file_to_image(game->mlx,
+			"GameSprites/Exit.xpm", &width, &len);
+	if (!game->exit.img || !game->pstair.img)
+		return (1);
+	transparency(&game->pstair, &game->player->player_img);
+	return (0);
 }

@@ -58,11 +58,9 @@ OFILES = $(SRCS:.c=.o)
 OBONUS = $(SRCSB:.c=.o)
 
 
-HEADER = include/%.h
-
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I$(HEADER)
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 
 NAME = libft.a
 

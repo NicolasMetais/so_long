@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:03:48 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:04:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:18:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Dupliquer une chaîne */
-#include "../include/libft.h"
+#include "libft.h"
 
 char	*ft_strdup(const char *s)
 {

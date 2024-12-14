@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:01:40 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/12 01:58:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:51:03 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	spawnpos(char **gameboard, t_param *checker)
 {

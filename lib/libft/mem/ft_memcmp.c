@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:37:54 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:03:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:17:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Comparaison de zones mémoire */
-#include "../include/libft.h"
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

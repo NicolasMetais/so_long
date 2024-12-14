@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:07:13 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/08 18:55:33 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:50:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	freecheckpoint(t_checkpoint *checkpoint)
 {

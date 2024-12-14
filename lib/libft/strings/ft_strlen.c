@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:17:40 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:04:24 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:18:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {

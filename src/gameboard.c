@@ -6,12 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:42:31 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:12:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:51:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
-#include <fcntl.h>
+#include "so_long.h"
 
 size_t	gettablesize(char *arg)
 {

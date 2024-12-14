@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 20:31:48 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:04:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:18:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 static	size_t	wordcount(char const *s, char c)
 {

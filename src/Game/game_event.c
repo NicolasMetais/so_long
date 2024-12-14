@@ -6,11 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:04:30 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/13 19:51:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:50:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	move_up(t_game *game);
 void	move_down(t_game *game);
@@ -21,10 +21,12 @@ void	freetile(t_map **tile, size_t size);
 
 int	handle_destroy(t_game *game)
 {
+	freetile(game->map, game->size);
 	freeimg(game);
+	free(game->player->pos);
+	free(game->player);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
-	freetile(game->map, game->size);
 	free(game->mlx);
 	exit(0);
 	return (0);

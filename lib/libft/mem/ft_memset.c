@@ -6,12 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:10:00 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:03:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/14 23:17:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Remplir une zone mémoire avec un octet donné */
-#include "../include/libft.h"
+#include "libft.h"
 
 void	*ft_memset(void *s, int c, size_t n)
 {
