@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:42:31 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/14 23:51:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/15 00:35:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ size_t	gettablesize(char *arg)
 
 	fd = open(arg, O_RDONLY);
 	line = get_next_line(fd);
+	if (fd == -1)
+	{
+		write(1, "Error\n File doesn't exist", 26);
+		return (0);
+	}
 	if (!line)
 		return (0);
 	free(line);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:15:04 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/14 23:51:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/15 00:32:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,21 @@ void	freesizet(size_t **table, size_t checker)
 	free(table);
 }
 
-size_t	version_check(char *arg)
+size_t	version_check(char *version, char *tocheck)
 {
-	char	*version;
+	size_t	sizeversion;
+	size_t	sizecheck;
 
-	version = ft_strnstr(arg, ".ber", ft_strlen(arg));
-	if (version != NULL)
-		return (0);
-	return (1);
+	sizeversion = ft_strlen(version);
+	sizecheck = ft_strlen(tocheck);
+	while (sizeversion > 0)
+	{
+		if (version[sizeversion - 1] != tocheck[sizecheck - 1])
+			return (1);
+		sizeversion--;
+		sizecheck--;
+	}
+	return (0);
 }
 
 void	init(t_param *checker)
@@ -76,7 +83,7 @@ int	main(int ac, char **av)
 	gameboard = NULL;
 	if (ac == 2)
 	{
-		if (version_check(av[1]) == 1)
+		if (version_check(".ber", av[1]) == 1)
 			return (write(2, "Error \n Bad file extension", 27));
 		gameboard = table_construct(gameboard, av[1], &checker);
 		if (!gameboard)

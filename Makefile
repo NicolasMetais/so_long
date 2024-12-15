@@ -40,8 +40,11 @@ $(NAME): lib mlx $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
-	rm -rf *.o
 	rm -rf ./src/*.o
+	rm -rf ./src/Game/*.o
+	rm -rf ./src/Game/Images/*.o
+	rm -rf ./src/Parse/*.o
+	rm -rf ./src/Parse/Pathfinding/*.o
 	make clean -C ./lib/libft
 	make clean -C ./minilibx-linux/
 

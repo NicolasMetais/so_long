@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:14:29 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/14 23:42:52 by nmetais          ###   ########.fr       */
+/*   Updated: 2024/12/15 00:20:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int		coin_transparency(t_game *game,	int width, int len);
 void	freecheckpoint(t_checkpoint *checkpoint);
 void	freechar(char **table);
 void	freesizet(size_t **table, size_t checker);
-size_t	version_check(char *arg);
 void	bfs(size_t **pathtab, t_param *checker,
 			t_checkpoint *checkpoint);
 void	game_event(t_game *game, t_param *checker);
